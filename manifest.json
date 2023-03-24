@@ -1,0 +1,28 @@
+{
+
+  "manifest_version": 2,
+  "name": "EZ Chime In",
+  "version": "1.0",
+
+  "description": "Makes chime in very easy",
+
+  "permissions": [
+    "webRequest", "<all_urls>", "webRequestBlocking", "webRequestFilterResponse" 
+  ],
+
+  "icons": {
+    "48": "icons/logo48.png"
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["*://chimein2.cla.umn.edu/*"],
+      "js": ["reveal.js"]
+    }
+  ],
+
+  "background": {
+    "scripts": ["background.js"]
+  }
+
+}
