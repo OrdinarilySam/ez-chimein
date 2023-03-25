@@ -7,7 +7,7 @@
   "description": "Makes chime in very easy",
 
   "permissions": [
-    "webRequest", "<all_urls>", "webRequestBlocking", "webRequestFilterResponse" 
+    "webRequest", "*://chimein2.cla.umn.edu/chime/*", "webRequestBlocking", "webRequestFilterResponse" 
   ],
 
   "icons": {
@@ -16,6 +16,14 @@
 
   "background": {
     "scripts": ["background.js"]
+  },
+
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "chimein@dadahasa.com",
+      "strict_min_version": "100.0"
+    }
   }
+
 
 }
