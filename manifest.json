@@ -14,13 +14,6 @@
     "48": "icons/logo48.png"
   },
 
-  "content_scripts": [
-    {
-      "matches": ["*://chimein2.cla.umn.edu/*"],
-      "js": ["reveal.js"]
-    }
-  ],
-
   "background": {
     "scripts": ["background.js"]
   }
