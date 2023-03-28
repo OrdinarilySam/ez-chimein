@@ -2,7 +2,7 @@ const reqFilter = {
   urls: ["*://chimein2.cla.umn.edu/api/chime/*/openQuestions"],
 };
 
-const answerData = []
+let answerData = []
 
 function inListener(details) {
   let filter = browser.webRequest.filterResponseData(details.requestId);
@@ -19,6 +19,7 @@ function inListener(details) {
   filter.onstop = (event) => {
     filter.write(encoder.encode(str))
     const data = JSON.parse(str.trim())
+    answerData = []
     for(const question in data.sessions){
       answerData.push([])
       const path = data.sessions[question].question.question_info.question_responses
@@ -40,9 +41,13 @@ function inListener(details) {
   return {};
 }
 
+browser.webRequest.onBeforeRequest.addListener(inListener, reqFilter, [
+  "blocking",
+]);
+
 browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  if(message === "question_request"){
-    sendResponse({response: questionData})
+  if(message.message === "answer_request"){
+    sendResponse({response: answerData})
   }
 })
 
