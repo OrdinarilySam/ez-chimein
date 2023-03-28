@@ -7,11 +7,16 @@
   "description": "Makes chime in very easy",
 
   "permissions": [
-    "webRequest", "*://chimein2.cla.umn.edu/chime/*", "webRequestBlocking", "webRequestFilterResponse" 
+    "webRequest", "webRequestBlocking", "webRequestFilterResponse", "*://chimein2.cla.umn.edu/chime*"
   ],
 
   "icons": {
     "48": "icons/logo48.png"
+  },
+
+  "content-scripts": {
+    "matches": "*://chimein2.cla.umn.edu/chime*",
+    "js": "content.js"
   },
 
   "background": {
