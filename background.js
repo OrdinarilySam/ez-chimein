@@ -14,10 +14,10 @@ function inListener(details) {
 
   filter.ondata = (event) => {
     str += decoder.decode(event.data, { stream: true });
+    filter.write(event.data)
   };
 
   filter.onstop = (event) => {
-    filter.write(encoder.encode(str))
     const data = JSON.parse(str.trim())
     answerData = []
     for(const question in data.sessions){
