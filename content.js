@@ -17,12 +17,15 @@ button.addEventListener("click", (event) => {
     button.innerText = "X"
     button.className = "hide-btn switch-btn"
     browser.runtime.sendMessage({message: "answer_request"})
-      .then(response => handleData(response.response))
+      .then(response => {
+        handleData(response.response)
+      })
   }
 })
 
 
 function handleData(answerData) {
+  if(answerData.length < 1) document.location.reload();
   const elements = document.querySelectorAll("article.participant-prompt")
   elements.forEach((element, index) => {
     const options = element.childNodes[1].childNodes[0].childNodes[0].children
