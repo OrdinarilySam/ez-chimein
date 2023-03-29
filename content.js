@@ -29,7 +29,12 @@ function handleData(answerData) {
   const elements = document.querySelectorAll("article.participant-prompt")
   elements.forEach((element, index) => {
     const options = element.childNodes[1].childNodes[0].childNodes[0].children
+    let selected = false
     answerData[index].forEach((answer) => {
+      if(!selected){
+        options[answer].children[0].click()
+        selected = true
+      }
       options[answer].children[1].className += " correct-answer"
     })
   })
