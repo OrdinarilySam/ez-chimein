@@ -1,41 +1,64 @@
-const button = document.createElement('button');
-button.innerText = 'O';
-button.className = "reveal-btn switch-btn"
-document.body.appendChild(button);
+const rhButton = document.createElement('button');
+const sButton = document.createElement('button')
+rhButton.innerText = 'O';
+rhButton.className = "reveal-btn switch-btn"
+sButton.innerText = "#"
+sButton.className = "select-btn switch-btn"
+document.body.appendChild(rhButton);
+document.body.appendChild(sButton)
 let isRevealed = false;
+let data = []
 
-button.addEventListener("click", (event) => {
+rhButton.addEventListener("click", (event) => {
   if(isRevealed){
     isRevealed = !isRevealed
-    button.innerText = "O"
-    button.className = "reveal-btn switch-btn"
+    rhButton.innerText = "O"
+    rhButton.className = "reveal-btn switch-btn"
     document.querySelectorAll(".correct-answer").forEach(element => {
       element.classList.remove("correct-answer")
     })
   }else{
     isRevealed = !isRevealed
-    button.innerText = "X"
-    button.className = "hide-btn switch-btn"
-    browser.runtime.sendMessage({message: "answer_request"})
-      .then(response => {
-        handleData(response.response)
-      })
-  }
+    rhButton.innerText = "X"
+    rhButton.className = "hide-btn switch-btn"
+    handleModifications(true)
+}})
+
+sButton.addEventListener("click", (event) => {
+  handleModifications(false)
 })
 
-
-function handleData(answerData) {
-  if(answerData.length < 1) document.location.reload();
-  const elements = document.querySelectorAll("article.participant-prompt")
-  elements.forEach((element, index) => {
-    const options = element.childNodes[1].childNodes[0].childNodes[0].children
-    let selected = false
-    answerData[index].forEach((answer) => {
-      if(!selected){
-        options[answer].children[0].click()
-        selected = true
+function retreiveData() {
+  browser.runtime.sendMessage({message: "answer_request"})
+    .then(response => {
+      if(response.response.length < 1){
+        document.location.reload();
+        return false
+      }else{
+        data = response.response
       }
-      options[answer].children[1].className += " correct-answer"
+      
     })
-  })
+}
+
+function handleModifications(reveal) {
+  if(data.length >= 1 || retreiveData()){
+    const elements = document.querySelectorAll("article.participant-prompt")
+    elements.forEach((element, index) => {
+      const options = element.childNodes[1].childNodes[0].childNodes[0].children
+      let selected = false
+      data[index].forEach((answer) => {
+        if(reveal){
+          options[answer].children[1].className += " correct-answer"
+        }else{
+          if(!selected){
+            options[answer].children[0].click()
+            selected = true
+          }
+        }
+      })
+    })
+  }else{
+    return
+  }
 }
