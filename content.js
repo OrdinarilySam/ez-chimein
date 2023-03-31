@@ -7,7 +7,7 @@ sButton.className = "select-btn switch-btn"
 document.body.appendChild(rhButton);
 document.body.appendChild(sButton)
 let isRevealed = false;
-let data = []
+let answerData = []
 
 rhButton.addEventListener("click", (event) => {
   if(isRevealed){
@@ -28,37 +28,36 @@ sButton.addEventListener("click", (event) => {
   handleModifications(false)
 })
 
-function retreiveData() {
-  browser.runtime.sendMessage({message: "answer_request"})
-    .then(response => {
+async function retreiveData() {
+  if(answerData.length < 1){
+    response = await browser.runtime.sendMessage({message: "answer_request"})
       if(response.response.length < 1){
         document.location.reload();
-        return false
       }else{
-        data = response.response
+        answerData = response.response
+        return answerData
       }
-      
-    })
+  } else {
+    return answerData
+  }
 }
 
-function handleModifications(reveal) {
-  if(data.length >= 1 || retreiveData()){
-    const elements = document.querySelectorAll("article.participant-prompt")
-    elements.forEach((element, index) => {
-      const options = element.childNodes[1].childNodes[0].childNodes[0].children
-      let selected = false
-      data[index].forEach((answer) => {
-        if(reveal){
-          options[answer].children[1].className += " correct-answer"
-        }else{
-          if(!selected){
-            options[answer].children[0].click()
-            selected = true
-          }
+async function handleModifications(reveal) {
+  const data = await retreiveData()
+  if(!data || data.length < 1) return;
+  const elements = document.querySelectorAll("article.participant-prompt")
+  elements.forEach((element, index) => {
+    const options = element.childNodes[1].childNodes[0].childNodes[0].children
+    let selected = false
+    data[index].forEach((answer) => {
+      if(reveal){
+        options[answer].children[1].className += " correct-answer"
+      }else{
+        if(!selected){
+          options[answer].children[0].click()
+          selected = true
         }
-      })
+      }
     })
-  }else{
-    return
-  }
+  })
 }
