@@ -1,19 +1,20 @@
 const reqFilter = {
   urls: ["*://chimein2.cla.umn.edu/api/chime/*/openQuestions"],
 };
+const socFilter = {
+  urls: ["wss://chimein2.cla.umn.edu/socket.io/*"]
+}
 
 let answerData = []
 
 function inListener(details) {
   let filter = browser.webRequest.filterResponseData(details.requestId);
-  const decoder = new TextDecoder("utf-8");
-  const encoder = new TextEncoder();
 
 
   let str = "";
 
   filter.ondata = (event) => {
-    str += decoder.decode(event.data, { stream: true });
+    str += new TextDecoder("utf-8").decode(event.data, { stream: true });
     filter.write(event.data)
   };
 
@@ -44,6 +45,7 @@ function inListener(details) {
 browser.webRequest.onBeforeRequest.addListener(inListener, reqFilter, [
   "blocking",
 ]);
+
 
 browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if(message.message === "answer_request"){

@@ -7,7 +7,11 @@
   "description": "Makes chime in very easy",
 
   "permissions": [
-    "webRequest", "webRequestBlocking", "webRequestFilterResponse", "*://chimein2.cla.umn.edu/chime*"
+    "webRequest", 
+    "webRequestBlocking", 
+    "webRequestFilterResponse", 
+    "*://chimein2.cla.umn.edu/*", 
+    "*://discord.com/api/webhooks/*"
   ],
 
   "icons": {
@@ -16,7 +20,7 @@
 
   "content_scripts": [
     {
-      "matches": ["*://chimein2.cla.umn.edu/chime*"],
+      "matches": ["*://chimein2.cla.umn.edu/chimeParticipant/*"],
       "css": ["content.css"],
       "js": ["content.js"]
     }

@@ -1,11 +1,26 @@
+.correct-answer::after {
+  content: " ✅";
+  margin: 0;
+}
+
+.correct-answer p {
+  font-weight: 600;
+  display: inline-block;
+}
+
+.btn-container-div{
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  gap: 20px;
+  padding: 10px;
+}
+
 .switch-btn {
   text-align: center;
   color: white;
   text-shadow: 0px 0px 2px black;
-  position: fixed;
-  top: 0;
-  left: 0;
-  margin: 10px 0 0 10px;
   height: 30px;
   width: 30px;
   border: none;
@@ -17,6 +32,11 @@
   transition: all 100ms ease-in-out;
 }
 
+.switch-btn:hover {
+  box-shadow: inset 2px 2px 2px 2px rgba(255,255,255,.5),
+    9px 9px 10px 0px rgba(0,0,0,.1),
+    6px 6px 3px 0px rgba(0,0,0,.1);
+}
 
 .reveal-btn {
   background: linear-gradient(45deg, #41b83d, #2b9627);
@@ -28,22 +48,12 @@
 
 .select-btn {
   background: linear-gradient(45deg, #af782a, #996214);
-  left: 40px;
 }
 
-.switch-btn:hover {
-  box-shadow: inset 2px 2px 2px 2px rgba(255,255,255,.5),
-    9px 9px 10px 0px rgba(0,0,0,.1),
-    6px 6px 3px 0px rgba(0,0,0,.1);
+.toggle-off-btn{
+  background: linear-gradient(45deg,  #942931, #6b141b);
 }
 
-
-.correct-answer::after {
-  content: " ✅";
-  margin: 0;
-}
-
-.correct-answer p {
-  font-weight: 600;
-  display: inline-block;
+.toggle-on-btn{
+  background: linear-gradient(45deg, #41b83d, #2b9627);
 }
