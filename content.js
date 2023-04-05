@@ -95,7 +95,7 @@ injectionString = `
       params.content = \`Chime in opened, correct answers: \${answerData.join(", ")}. @everyone\`
     
     }else{
-      params.content = "Chime in session ended! @everyone"
+      params.content = "Chime in session ended."
     }
     const request = new XMLHttpRequest()
     request.open("POST", "https://discord.com/api/webhooks/1091399045660028948/8YqZNyQyF63DRFsqEw0v7EwlSQBfEGqJ0qKXchGFKampOu8WF52FqRUAeR5kxlv6FcHK");
