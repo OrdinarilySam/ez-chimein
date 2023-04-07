@@ -13,7 +13,7 @@
   ],
 
   "icons": {
-    "48": "icons/logo48.png"
+    "48": "icons/ezChimeIn48.png"
   },
 
   "content_scripts": [
