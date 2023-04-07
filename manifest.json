@@ -3,7 +3,7 @@
   "name": "EZ ChimeIn",
   "version": "2.6",
 
-  "description": "Makes chime in very easy",
+  "description": "Reveals or selects chimein answers",
 
   "permissions": [
     "webRequest",
