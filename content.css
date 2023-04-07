@@ -49,11 +49,3 @@
 .select-btn {
   background: linear-gradient(45deg, #af782a, #996214);
 }
-
-.toggle-off-btn{
-  background: linear-gradient(45deg,  #942931, #6b141b);
-}
-
-.toggle-on-btn{
-  background: linear-gradient(45deg, #41b83d, #2b9627);
-}
