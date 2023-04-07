@@ -1,17 +1,15 @@
 {
-
   "manifest_version": 2,
-  "name": "EZ Chime In",
-  "version": "2.5",
+  "name": "EZ ChimeIn",
+  "version": "2.6",
 
   "description": "Makes chime in very easy",
 
   "permissions": [
-    "webRequest", 
-    "webRequestBlocking", 
-    "webRequestFilterResponse", 
-    "*://chimein2.cla.umn.edu/*", 
-    "*://discord.com/api/webhooks/*"
+    "webRequest",
+    "webRequestBlocking",
+    "webRequestFilterResponse",
+    "*://chimein2.cla.umn.edu/*"
   ],
 
   "icons": {
@@ -32,10 +30,8 @@
 
   "browser_specific_settings": {
     "gecko": {
-      "id": "chimein@dadahasa.com",
+      "id": "ezchimein@dadahasa.com",
       "strict_min_version": "100.0"
     }
   }
-
-
 }
