@@ -1,18 +1,13 @@
 const reqFilter = {
   urls: ["*://chimein2.cla.umn.edu/api/chime/*/openQuestions"],
 };
-const socFilter = {
-  urls: ["wss://chimein2.cla.umn.edu/socket.io/*"]
-}
 
 let answerData = []
 
 function inListener(details) {
   let filter = browser.webRequest.filterResponseData(details.requestId);
 
-
   let str = "";
-
   filter.ondata = (event) => {
     str += new TextDecoder("utf-8").decode(event.data, { stream: true });
     filter.write(event.data)
