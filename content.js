@@ -54,10 +54,12 @@ async function retreiveData() {
 async function handleModifications(reveal) {
   const data = await retreiveData()
   if(!data || data.length < 1) return;
+
   const elements = document.querySelectorAll("article.participant-prompt")
   elements.forEach((element, index) => {
     const options = element.childNodes[1].childNodes[0].childNodes[0].children
     let selected = false
+    
     data[index].forEach((answer) => {
       if(reveal){
         options[answer].children[1].className += " correct-answer"
